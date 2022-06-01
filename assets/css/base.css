@@ -1,0 +1,269 @@
+:root {
+    /* Mã màu chính của trang web */
+    --primary-color: #EE4D2D; 
+    --white-color: #fff;
+    --black-color: #000;
+    --text-color: #333;
+    --border-color: #dbdbdb;
+    --star-gold-color: #FFCE3E;
+
+    --header-height: 120px;
+    --navbar-height: 34px;
+    --header-with-search-height: calc(var(--header-height) - var(--navbar-height));
+    --header-sort-bar-height: 46px;
+
+    /* Sửa lỗi khi người dùng ấn vào sẽ bị đổi màu(highline) */
+    -webkit-tap-highlight-color: transparent;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+html {
+    /* 100% = 16px */
+    /* 62.5% = 10px = 1rem => 16px = 1.6 rem */
+    font-size: 62.5%;
+    /* Độ cao dòng chữ mặc định */
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+/* Có 3 cấp. Trong grid có nhiều row và trong row có nhiều column.
+.grid {
+    .row {
+        .column {}
+    }
+} 
+*/
+
+/* Responsive */
+/* .grid {
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.grid__full-width {
+    width: 100%;
+} */
+
+.grid__row {
+    /* Những thẻ nằm trong thẻ thì nằm ngang */
+    display: flex; 
+    /* Tổng độ dài của child vượt qua row thì xuống hàng */
+    flex-wrap: wrap;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+/* TEST chuẩn bị cho responsive*/
+/* col-2-12 = chiếm 2 cột của 12 cột (1 ô)*/
+.grid__column-2-12 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: calc(2/12 * 100%);
+}
+
+/*  col-2-10 = chiếm 2 cột của 10 cột (5 ô) */
+.grid__column-2-10 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: calc(100% / 5);
+}
+
+/*  col-10-12 = chiếm 10 cột của 12 cột (khung bao 5 ô)*/
+.grid__column-10-12 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: calc(10/12 * 100%);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes growth {
+    from {
+        transform: scale(var(--growth-form));
+    }
+    to {
+        transform: scale(var(--growth-to));
+    }
+}
+
+/* MODAL */
+.modal {
+    /* Chiếm toàn bộ màn hình */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* Canh giữ nhanh: Cha: display: flex - Con: margin: auto*/
+    display: flex;
+    animation: fadeIn linear 0.1s;
+}
+
+.modal__overlay {
+    /* Là con của modal */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* Nền màu đen và nhìn xuyên qua được */
+    background-color: rgba(0,0,0,0.4);
+    /* z-index: 0; */
+}
+
+.modal__body {
+    --growth-form: 0.7;
+    --growth-to: 1;
+    margin: auto;
+    position: relative;
+    /* z-index: xét thằng nào lớn hơn thì nằm trên */
+    z-index: 1;
+    animation: growth linear 0.1s;
+}
+
+/* Button style */
+.btn {
+    min-width: 124px;
+    height: 34px;
+    text-decoration: none;
+    border: none;
+    border-radius: 2px;
+    font-size: 1.5rem;
+    padding: 0 12px;
+    background-color: var(--white-color);
+    outline: none;
+    cursor: pointer;
+    color: var(--text-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.6rem;
+}
+
+.btn.btn--nomal:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.btn.btn--size-s {
+    height: 32px;
+    font-size: 12px;
+    padding: 0 8px;
+}
+
+.btn.btn--primary {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+}
+
+/* Vô hiệu hoá nút*/
+/* Khi nào cần vô hiệu hoá 1 nút thì gán: 'btn--disabled' vào button class đó */
+.btn.btn--disabled {
+    color: #949494;
+    cursor: default;
+    background-color: #c3c3c3;
+}
+
+/* SELECTION */
+.select-input{
+    position: relative;
+    min-width: 200px;
+    height: 34px;
+    padding: 0 12px;
+    border-radius: 2px;
+    background-color: var(--white-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.select-input__lable {
+    font-size: 1.4rem;
+}
+
+.select-input__icon {
+    font-size: 1.4rem;
+    color: rgb(131, 131, 131);
+    position: relative;
+    top: 1px;
+}
+
+.select-input:hover .select-input__list {
+    display: block;
+}
+
+/* LIST OPTION */
+.select-input__list {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 22px;
+    border-radius: 2px;
+    background-color: var(--white-color);
+    padding: 8px 16px;
+    list-style: none;
+    display: none;
+    z-index: 1;
+}
+
+.select-input__link {
+    font-size: 1.4rem;
+    color: var(--text-color);
+    text-decoration: none;
+    display: block;
+    padding: 4px 0;
+}
+
+.select-input__link:hover {
+    color: var(--primary-color);
+}
+
+/* Phân trang */
+.pagiantion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
+.pagiantion-item {
+    margin: 0 10px;
+    --height: 30px;
+    height: var(--height);
+    line-height: var(--height);
+}
+
+.pagiantion-item--active .pagiantion-item__link {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+}
+
+.pagiantion-item--active .pagiantion-item__link:hover {
+    background-color: #fb6445;
+}
+
+.pagiantion-item__link {
+    text-decoration: none;
+    font-size: 1.8rem;
+    color: #939393;
+    min-width: 40px;
+    font-weight: 100;
+    /* Thẻ a không có thuộc tính display: block (div thì có)*/
+    /* Nên muốn canh giữ phải thêm: "display: block;" vào trước*/
+    display: block;
+    text-align: center;
+    border-radius: 2px;
+}
+
+ 
+
